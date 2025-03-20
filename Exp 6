@@ -1,0 +1,108 @@
+1.Write a program to sort a list of Employee objects (name, age, salary) using lambda expressions.  
+
+//Code:
+import java.util.*;
+
+class Employee {
+    String name;
+    int age;
+    double salary;
+
+    // Constructor
+    public Employee(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    // Getters for the attributes
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{name='" + name + "', age=" + age + ", salary=" + salary + "}";
+    }
+}
+
+public class EmployeeSorting {
+    public static void main(String[] args) {
+        // Creating a list of employees
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("Alice", 30, 70000));
+        employees.add(new Employee("Bob", 25, 60000));
+        employees.add(new Employee("Charlie", 35, 80000));
+        employees.add(new Employee("David", 28, 75000));
+
+        // Sorting employees by name using lambda expression
+        System.out.println("Sorting by Name:");
+        employees.sort((e1, e2) -> e1.getName().compareTo(e2.getName()));
+        employees.forEach(System.out::println);
+
+        // Sorting employees by age using lambda expression
+        System.out.println("\nSorting by Age:");
+        employees.sort((e1, e2) -> Integer.compare(e1.getAge(), e2.getAge()));
+        employees.forEach(System.out::println);
+
+        // Sorting employees by salary using lambda expression
+        System.out.println("\nSorting by Salary:");
+        employees.sort((e1, e2) -> Double.compare(e1.getSalary(), e2.getSalary()));
+        employees.forEach(System.out::println);
+    }
+}
+
+2.Create a program to use lambda expressions and stream operations to filter students scoring above 75%, sort them by marks, and display their names
+11:
+
+//Code:
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Student {
+    String name;
+    double marks;
+
+    // Constructor
+    public Student(String name, double marks) {
+        this.name = name;
+        this.marks = marks;
+    }
+
+    // Getters for the attributes
+    public String getName() {
+        return name;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+}
+
+public class StudentFilteringSorting {
+    public static void main(String[] args) {
+        // Creating a list of students
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Alice", 82.5));
+        students.add(new Student("Bob", 72.0));
+        students.add(new Student("Charlie", 90.0));
+        students.add(new Student("David", 85.0));
+        students.add(new Student("Eva", 60.0));
+
+        // Filtering students who scored above 75%, sorting them by marks, and displaying their names
+        System.out.println("Students scoring above 75%, sorted by marks:");
+        students.stream()
+                .filter(student -> student.getMarks() > 75)               // Filter students with marks > 75
+                .sorted((s1, s2) -> Double.compare(s2.getMarks(), s1.getMarks()))  // Sort by marks in descending order
+                .map(Student::getName)                                      // Get only the names
+                .forEach(System.out::println);                               // Print the names
+    }
+}
